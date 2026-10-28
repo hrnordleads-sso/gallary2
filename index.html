@@ -1,0 +1,360 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Brewnns — Gallery Site 02</title>
+  <meta name="description" content="Brewnns Coffee House — cinematic coffee landing rebuilt from web2.mp4." />
+  <meta name="robots" content="index,follow" />
+  <meta property="og:title" content="Brewnns — Gallery Site 02" />
+  <meta property="og:description" content="Cinematic coffee landing with scroll-driven 3D motion." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%23120d0a' width='32' height='32' rx='8'/%3E%3Ctext x='16' y='21' text-anchor='middle' font-size='14' fill='%23f4f1ec'%3Eb%3C/text%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#120d0a" />
+  <meta name="color-scheme" content="dark light" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@1,500;1,600;1,700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.module.js"
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader-count" id="loaderCount">0</div>
+    <div class="loader-cup">
+      <div class="loader-fill" id="loaderFill"></div>
+    </div>
+    <div class="loader-brand">brewnns</div>
+  </div>
+
+  <header class="nav" data-theme="dark">
+    <nav class="links" aria-label="Primary">
+      <a href="#shop">Shop</a>
+      <a href="#menu">Menu</a>
+      <a href="#story">Our story</a>
+      <a href="#locations">Locations</a>
+      <a class="menu-order" href="#coffee-right-now">Order online</a>
+      <a class="menu-gift" href="#shop">Gift cards</a>
+    </nav>
+    <a class="logo" href="#top">brewnns</a>
+    <div class="nav-end">
+      <a class="order" href="#coffee-right-now">Cart (0)</a>
+      <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero" id="shop">
+      <div class="hero-copy">
+        <p class="eyebrow">Specialty coffee roasts</p>
+        <h1>
+          <span>Coffee</span>
+          <span>for your</span>
+          <em id="momentWord"></em>
+        </h1>
+        <p class="lede">Carefully sourced beans and thoughtfully brewed to bring out the best in every cup.</p>
+        <a class="text-link" href="#menu">Explore menu <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="hero-stage" id="heroStage" aria-hidden="true">
+        <div class="hero-float" id="heroFloat">
+          <div class="spot"></div>
+          <canvas id="heroCanvas"></canvas>
+          <div class="hero-steam" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="tip tip-latte">House latte <b>$4.50</b></div>
+          <div class="tip tip-roast">Slow roast</div>
+          <div class="fallback-3d">
+            <div class="prod-cup"><div class="lid"></div><div class="sleeve"><span>brewnns</span><small>COFFEE HOUSE</small></div></div>
+            <div class="prod-bag"><strong>brewnns</strong><em>slow roast</em></div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-meta">
+        <span>Open daily · 07:00 – 21:00</span>
+        <span>128 Coffee Street · San Francisco, CA</span>
+        <span>Slow roast · whole bean</span>
+      </div>
+    </section>
+
+    <section class="section light menu-strip" id="categories" aria-label="Menu categories">
+      <p class="menu-strip-label">Our menu</p>
+      <div class="menu-strip-track" role="list">
+        <a role="listitem" href="#menu" data-i="01"><span class="ms-i">01</span><span class="ms-n">Drip</span></a>
+        <a role="listitem" href="#menu" data-i="02"><span class="ms-i">02</span><span class="ms-n">Iced</span></a>
+        <a role="listitem" href="#menu" data-i="03"><span class="ms-i">03</span><span class="ms-n">Latte</span></a>
+        <a role="listitem" href="#menu" data-i="04"><span class="ms-i">04</span><span class="ms-n">Chai</span></a>
+        <a role="listitem" href="#menu" data-i="05"><span class="ms-i">05</span><span class="ms-n">Cappuccino</span></a>
+        <a role="listitem" href="#menu" data-i="06"><span class="ms-i">06</span><span class="ms-n">Americano</span></a>
+        <a role="listitem" href="#menu" data-i="07"><span class="ms-i">07</span><span class="ms-n">Espresso</span></a>
+      </div>
+    </section>
+
+    <section class="section light favorites" id="menu">
+      <div class="watermark" aria-hidden="true">b</div>
+      <div class="fav-board">
+        <div class="fav-copy">
+          <h2>
+            <span>Favorites</span>
+            <span>made</span>
+            <span>daily</span>
+          </h2>
+          <p>Quality ingredients, carefully prepared, simply balanced and made to enjoy.</p>
+          <a class="fav-all" href="#menu">View full menu →</a>
+        </div>
+        <ul class="fav-list" role="listbox" aria-label="Favorite drinks">
+          <li role="option" aria-selected="true">
+            <button type="button" class="fav-item is-active" data-product="cappuccino" data-index="0">
+              <span class="fi-num">01</span>
+              <span class="fi-name">Cappuccino</span>
+              <span class="fi-price">$5.50</span>
+              <i class="fi-line" aria-hidden="true"></i>
+            </button>
+          </li>
+          <li role="option" aria-selected="false">
+            <button type="button" class="fav-item" data-product="latte" data-index="1">
+              <span class="fi-num">02</span>
+              <span class="fi-name">Latte</span>
+              <span class="fi-price">$6.25</span>
+              <i class="fi-line" aria-hidden="true"></i>
+            </button>
+          </li>
+          <li role="option" aria-selected="false">
+            <button type="button" class="fav-item" data-product="matcha" data-index="2">
+              <span class="fi-num">03</span>
+              <span class="fi-name">Iced matcha</span>
+              <span class="fi-price">$6.25</span>
+              <i class="fi-line" aria-hidden="true"></i>
+            </button>
+          </li>
+          <li role="option" aria-selected="false">
+            <button type="button" class="fav-item" data-product="roll" data-index="3">
+              <span class="fi-num">04</span>
+              <span class="fi-name">Cinnamon roll</span>
+              <span class="fi-price">$5.00</span>
+              <i class="fi-line" aria-hidden="true"></i>
+            </button>
+          </li>
+        </ul>
+        <div class="fav-preview" aria-live="polite">
+          <span class="fav-preview-index" id="favIndex" aria-hidden="true">01</span>
+          <div class="fav-preview-floor" aria-hidden="true"></div>
+          <canvas id="favCanvas" class="fav-canvas" aria-hidden="true"></canvas>
+          <div class="fav-fallbacks" aria-hidden="true">
+            <div class="shot espresso fallback-shot is-active" data-product="cappuccino"></div>
+            <div class="shot latte fallback-shot" data-product="latte"></div>
+            <div class="shot matcha fallback-shot" data-product="matcha"></div>
+            <div class="fav-still fallback-shot" data-product="roll">
+              <div class="fav-still-cup" aria-hidden="true">
+                <span class="fav-still-lid"></span>
+                <span class="fav-still-crema"></span>
+              </div>
+              <div class="fav-still-pastry" aria-hidden="true">
+                <span class="fav-still-plate"></span>
+                <span class="fav-still-roll"></span>
+              </div>
+            </div>
+          </div>
+          <p class="fav-preview-cap"><span id="favCapName">Cappuccino</span> · house favorite</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section light clock-sec" id="story">
+      <div class="watermark" aria-hidden="true">b</div>
+      <p class="clock-kicker">Any hour. Same standard.</p>
+      <div class="clock-wrap">
+        <ul class="clock-locs clock-locs-left" role="list">
+          <li>
+            <button type="button" class="loc-btn is-active" data-loc="0">
+              <span class="loc-name">129 Knott Street</span>
+              <span class="loc-city">San Francisco, CA</span>
+              <span class="loc-hours">Open 07:00 – 21:00</span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="loc-btn" data-loc="1">
+              <span class="loc-name">256 Mullner Street</span>
+              <span class="loc-city">San Francisco, CA</span>
+              <span class="loc-hours">Open 07:00 – 21:00</span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="loc-btn" data-loc="2">
+              <span class="loc-name">92 Gilman Street</span>
+              <span class="loc-city">San Francisco, CA</span>
+              <span class="loc-hours">Open 07:00 – 21:00</span>
+            </button>
+          </li>
+        </ul>
+        <div class="clock" aria-hidden="true">
+          <div class="clock-ring"></div>
+          <div class="clock-ticks" id="clockTicks"></div>
+          <div class="clock-face" id="clockFace"></div>
+          <div class="clock-drink">
+            <canvas id="clockCanvas"></canvas>
+            <div class="iced clock-fallback" aria-hidden="true">
+              <span class="straw"></span>
+              <span class="ice i1"></span>
+              <span class="ice i2"></span>
+              <span class="ice i3"></span>
+            </div>
+          </div>
+          <div class="clock-hand-wrap" aria-hidden="true"><span class="clock-hand"></span></div>
+        </div>
+        <div class="clock-aside">
+          <div class="loc-shots" aria-hidden="true">
+            <figure class="loc-shot is-active" data-loc="0">
+              <span class="loc-shot-grain"></span>
+              <span class="loc-shot-cup"></span>
+              <span class="loc-shot-label">Knott St</span>
+            </figure>
+            <figure class="loc-shot" data-loc="1">
+              <span class="loc-shot-grain"></span>
+              <span class="loc-shot-cup"></span>
+              <span class="loc-shot-label">Mullner St</span>
+            </figure>
+            <figure class="loc-shot" data-loc="2">
+              <span class="loc-shot-grain"></span>
+              <span class="loc-shot-cup"></span>
+              <span class="loc-shot-label">Gilman St</span>
+            </figure>
+          </div>
+          <p>Open daily for pour-overs, espresso, and slow mornings. Same cup, every hour.</p>
+          <a class="text-link dark-link" href="#locations">Find a location →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark city-sec">
+      <div class="city-veil" aria-hidden="true"></div>
+      <h2>
+        <span>The city <br class="br-m" />never stops.</span>
+        <span>Your coffee <br class="br-m" />shouldn’t</span>
+        <span>slow you <br class="br-m" />down.</span>
+      </h2>
+      <p class="city-note">Brewed for sidewalks, desks, and late trains.</p>
+      <div class="city-stage" id="cityStage" aria-hidden="true">
+        <canvas id="cityCanvas"></canvas>
+        <div class="fallback-3d city-fallback">
+          <div class="prod-cup"><div class="lid"></div><div class="sleeve"><span>brewnns</span><small>COFFEE HOUSE</small></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark coffee-right-now" id="coffee-right-now" aria-label="Coffee for right now">
+      <div class="crn-glow" aria-hidden="true"></div>
+      <div class="crn-surface" aria-hidden="true"></div>
+      <div class="crn">
+        <div class="crn-head">
+          <p class="crn-kicker">Freshly made</p>
+          <h2 class="crn-title">
+            <span>Coffee</span>
+            <span>for</span>
+            <span>right</span>
+            <span>now</span>
+          </h2>
+        </div>
+        <div class="crn-stage">
+          <div class="crn-pastry" data-layer="pastry" aria-hidden="true">
+            <div class="pastry-shadow"></div>
+            <div class="pastry-plate">
+              <div class="cinnamon-roll" aria-hidden="true">
+                <i class="roll-swirl"></i>
+                <i class="roll-core"></i>
+                <i class="roll-glaze"></i>
+              </div>
+            </div>
+          </div>
+          <article class="receipt" data-layer="receipt">
+            <p class="receipt-brand">brewnns</p>
+            <p class="receipt-house">coffee house</p>
+            <div class="receipt-shot" aria-hidden="true">
+              <span class="shot-straw"></span>
+              <span class="shot-glass"></span>
+            </div>
+            <ul>
+              <li>Iced matcha</li>
+              <li>Pastry</li>
+            </ul>
+            <p class="receipt-note">Skip the line. Order ahead.</p>
+            <i class="receipt-bars" aria-hidden="true"></i>
+          </article>
+          <div class="crn-drink" data-layer="drink" aria-hidden="true">
+            <div class="drink-shadow"></div>
+            <div class="drink-cup">
+              <span class="drink-lid"></span>
+              <span class="drink-straw"></span>
+              <span class="drink-sleeve"></span>
+              <span class="drink-glass">
+                <i class="drink-liquid"></i>
+                <i class="drink-ice i1"></i>
+                <i class="drink-ice i2"></i>
+                <i class="drink-ice i3"></i>
+                <i class="drink-ice i4"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="crn-side">
+          <p class="crn-copy">Fresh coffee and a small bite, ready when you are.</p>
+          <a class="crn-cta" href="#menu">Explore the menu <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="locations">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <div class="logo">brewnns</div>
+        <p>128 Coffee Street<br />San Francisco, CA 94103</p>
+      </div>
+      <div>
+        <h3>Shop</h3>
+        <a href="#shop">Coffee</a>
+        <a href="#shop">Merch</a>
+        <a href="#shop">Gift cards</a>
+      </div>
+      <div>
+        <h3>Menu</h3>
+        <a href="#menu">Favorites</a>
+        <a href="#menu">Journal</a>
+        <a href="#menu">Brew guides</a>
+      </div>
+      <div>
+        <h3>About</h3>
+        <a href="#story">Our story</a>
+        <a href="#story">Hours</a>
+        <a href="#locations">Locations</a>
+      </div>
+      <div>
+        <h3>Visit us</h3>
+        <a href="#story">129 Knott Street</a>
+        <a href="#story">256 Mullner Street</a>
+        <a href="#story">92 Gilman Street</a>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <a href="#locations">Hello</a>
+        <a href="#coffee-right-now">Wholesale</a>
+      </div>
+    </div>
+    <div class="foot-bottom"><span>© 2026 Brewnns Coffee House</span><span>San Francisco · Open daily</span></div>
+  </footer>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+  <script defer src="scroll-motion.js"></script>
+  <script defer type="module" src="world.js"></script>
+  <script defer src="main.js"></script>
+</body>
+</html>
